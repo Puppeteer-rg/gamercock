@@ -1,9 +1,13 @@
 // I won't fucking do discord.jsv13 because it's ass
 //also im not gonna organise my code because fuck you
 
+
+// Before you use this rename example.env to .env then put your bot token :) (remove the brackets u dumb fuck)
+
 const discord = require(`discord.js`)
 const bot = new discord.Client()
 const client = bot
+require("dotenv").config();
 
 const guildId = `982316150035742741`
 const chatName = `chat`
@@ -63,7 +67,7 @@ bot.on(`message`, (message) => {
     //ugh ugh ugh ugh
 })
 
-bot.login(``)
+bot.login(process.env.TOKEN)
 //139.210.20.105
 
 process.on('unhandledRejection', async (error) => {
