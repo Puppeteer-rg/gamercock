@@ -54,7 +54,7 @@ bot.on(`ready`, () => {
             channel.setName(`${chatName}-old-1`)
             channel.clone({name: chatName}) 
         }
-    }, 20000) //2.3148e-8 is 2 days, if you want it to be shorter or longer then search miliseconds to days
+    }, 2.3148e-8) //2.3148e-8 is 2 days, if you want it to be shorter or longer then search miliseconds to days
     //also discord doesn't show u how long the channel was created.
 })
 bot.on(`message`, (message) => {
