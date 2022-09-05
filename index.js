@@ -63,7 +63,7 @@ bot.on(`message`, (message) => {
     //ugh ugh ugh ugh
 })
 
-bot.login(`MTAxNTk4MzE4ODMzMTQ2MjcyNw.GYNG9z.bt_7HQ04UMsPp1JQ3rbv3rfUw1Xm5BY3q1bKj0`)
+bot.login(``)
 //139.210.20.105
 
 process.on('unhandledRejection', async (error) => {
