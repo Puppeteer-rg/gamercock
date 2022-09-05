@@ -8,6 +8,8 @@ const client = bot
 const guildId = `982316150035742741`
 const chatName = `chat`
 const roleName = `L Bozo`
+const days = 2
+const minsToBan = 2
 
 bot.on(`ready`, () => {
     console.log(`It's gamerdoc here.`)
@@ -21,7 +23,7 @@ bot.on(`ready`, () => {
         const diff = members2.filter(x => !members.includes(x))
         for(i=0; i < diff.length; i++) {
         const minsJoined = Math.floor((Math.abs(new Date() - diff[i].joinedAt)/1000)/60)
-           if (minsJoined >= 2) {
+           if (minsJoined >= minsToBan) {
             guildz.members.ban(diff[i])
             console.log(`banned ${diff[i].user.tag}`)
            }
@@ -54,17 +56,22 @@ bot.on(`ready`, () => {
             channel.setName(`${chatName}-old-1`)
             channel.clone({name: chatName}) 
         }
-    }, 2.3148e-8) //2.3148e-8 is 2 days, if you want it to be shorter or longer then search miliseconds to days
+    }, milToDays(days)) //2.3148e-8 is 2 days, if you want it to be shorter or longer then search miliseconds to days
     //also discord doesn't show u how long the channel was created.
 })
 bot.on(`message`, (message) => {
     //ugh ugh ugh ugh
 })
 
-bot.login(``)
+bot.login(`MTAxNTk4MzE4ODMzMTQ2MjcyNw.GYNG9z.bt_7HQ04UMsPp1JQ3rbv3rfUw1Xm5BY3q1bKj0`)
 //139.210.20.105
 
 process.on('unhandledRejection', async (error) => {
     console.log(`There has been an error in my code!\n`)
     console.log(error)
 });
+
+
+function milToDays(days){
+    return parseFloat(days) * 1.1574E-8
+}
