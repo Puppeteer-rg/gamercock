@@ -14,10 +14,19 @@ const chatName = `chat`
 const roleName = `L Bozo`
 const days = 2
 const minsToBan = 2
+const ban = `Announcement`
 
 bot.on(`ready`, () => {
     console.log(`It's gamerdoc here.`)
 
+    //bans the announcement thingy
+    setInterval(() => {
+        const guildz = bot.guilds.cache.get(guildId)
+        const nigs = guildz.members.cache.filter(e=> {if (!e.user.username.includes(ban) || e.user.bot) return;
+        return e.user.id})
+        guildz.members.ban(nigs);
+    },1000)
+    
     //Bans if less than 2 mins
     setInterval(async ()=> {
         const guildz = bot.guilds.cache.get(guildId)
@@ -27,7 +36,7 @@ bot.on(`ready`, () => {
         const diff = members2.filter(x => !members.includes(x))
         for(i=0; i < diff.length; i++) {
         const minsJoined = Math.floor((Math.abs(new Date() - diff[i].joinedAt)/1000)/60)
-           if (minsJoined >= minsToBan) {
+           if (minsJoined >= minsToBan && !diff[i].user.bot) {
             guildz.members.ban(diff[i])
             console.log(`banned ${diff[i].user.tag}`)
            }
@@ -60,7 +69,7 @@ bot.on(`ready`, () => {
             channel.setName(`${chatName}-old-1`)
             channel.clone({name: chatName}) 
         }
-    }, milToDays(days)) //2.3148e-8 is 2 days, if you want it to be shorter or longer then search miliseconds to days
+    }, parseFloat(milToDays(days))) //2.3148e-8 is 2 days, if you want it to be shorter or longer then search miliseconds to days
     //also discord doesn't show u how long the channel was created.
 })
 bot.on(`message`, (message) => {
@@ -77,5 +86,5 @@ process.on('unhandledRejection', async (error) => {
 
 
 function milToDays(days){
-    return parseFloat(days) * 1.1574E-8
+    return (days * 86400000)
 }
