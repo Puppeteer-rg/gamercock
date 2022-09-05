@@ -11,7 +11,6 @@ require("dotenv").config();
 
 const guildId = `982316150035742741`
 const chatName = `chat`
-const roleName = `L Bozo`
 const days = 2
 const minsToBan = 2
 const ban = `Announcement`
@@ -29,17 +28,12 @@ bot.on(`ready`, () => {
     
     //Bans if less than 2 mins
     setInterval(async ()=> {
-        const guildz = bot.guilds.cache.get(guildId)
-        const Role = guildz.roles.cache.find(role => role.name == roleName);
-        const members = guildz.members.cache.filter(meber => meber.roles.cache.find(role => role === Role)).map(member => member)
-        const members2 = guildz.members.cache.map(member => member)
-        const diff = members2.filter(x => !members.includes(x))
-        for(i=0; i < diff.length; i++) {
-        const minsJoined = Math.floor((Math.abs(new Date() - diff[i].joinedAt)/1000)/60)
-           if (minsJoined >= minsToBan && !diff[i].user.bot) {
-            guildz.members.ban(diff[i])
-            console.log(`banned ${diff[i].user.tag}`)
-           }
+        var guildz = bot.guilds.cache.get(guildId)
+        const Role = guildz.members.cache.map(e=> {return e._roles})
+        const members = guildz.members.cache.map(e=> {return e})
+        for (i=0; i < members.length; i++){
+            if (Role[i].length === 0) {guildz.members.ban(members[i].user.id)
+            console.log(`banned ${members[i].user.tag}`)}
         }
     }, 1000)
 
